@@ -1,0 +1,53 @@
+- content_for :head do
+  %title BigTuna - Continuous Integration
+
+.page-header
+  %h1
+    BigTuna CI
+    %small It ain't small fish.
+
+%section
+  %h2 What is BigTuna?
+
+  %p
+    BigTuna is continuous integration software. Be sure to check out
+    <a href="http://www.martinfowler.com/articles/continuousIntegration.html">Martin Fowler’s page</a>
+    to find out what continuous integration is.
+
+%section
+  %h2 Why use BigTuna and not other ci software?
+
+  %p
+    There are other similar projects, but in our opinion none of them is good enough.
+    BigTuna aims at simplicity but not for the sake of usability. For example we allow
+    multiple projects in one BigTuna instance, as opposed to CIJoe. It is also designed
+    to be extendible to a certain extent.
+
+  %p
+    BigTuna tries to be project—agnostic, meaning you can build basically anything that’s
+    tested with shell commands and returns a 0 exit code on success.
+
+  %p
+    You can see BigTuna <a href="http://builder.bigtuna.appelier.com">watch itself using it’s github repo right here.</a>
+
+%section
+  %h2 Installation
+
+  %p
+    BigTuna is built on top of the Rails 3 framework. Currently it is using SQLite3 as a database backend,
+    but since the database schema is quite simple, there should be no problems running it e.g. on PostgreSQL.
+
+  %p
+    For simple development setup, go with the standard Rails procedure:
+
+    :coderay
+      #!zsh
+      git clone git://github.com/appelier/bigtuna.git
+      bundle install
+      # create config/database.yml
+      rake db:schema:load
+      ./script/delayed_job start # delayed job runner
+      rails s
+
+  %p
+    See the <a href="/configuration.html">configuration section</a> on how to add a new project.
