@@ -1,5 +1,5 @@
 - content_for :head do
-  %title BigTuna - Continuous Integration - Configuration
+  %title BigTuna - Configuration
 
 .page-header
   %h1
@@ -32,7 +32,7 @@
     process is maintained by script/delayed_job file.
 
     :coderay
-      #!zsh
+      #!python
       RAILS_ENV=production ./script/delayed_job start
 
   %p
@@ -45,7 +45,7 @@
     look like this:
 
     :coderay
-      #!zsh
+      #!text
       bundle install --path=%project_dir%/bundle --deployment
       cp /project/shared/database.yml.sample %build_dir%/config/database.yml
       bundle exec rake
