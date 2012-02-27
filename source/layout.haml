@@ -5,10 +5,15 @@
     %meta{name: "charset", content: "utf-8"}
     %meta{name: "keywords", content: "bigtuna, continuous integration, ci, michal bugno, antek piechnik" }
     = stylesheet_link_tag "bootstrap.css"
+    = stylesheet_link_tag "bootstrap-responsive.css"
     = stylesheet_link_tag "site.css"
     = yield_content :head
 
   %body
     .navbar.navbar-fixed-top= partial("partials/navigation")
 
-    .container= yield
+    .container
+      = yield
+
+      %footer
+        Built and maintained since 2010 by <a href="http://twitter.com/michalbugno">michalbugno</a> and <a href="http://twitter.com/antekpiechnik">antekpiechnik</a>
