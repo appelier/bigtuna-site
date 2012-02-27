@@ -1,0 +1,78 @@
+- content_for :head do
+  %title BigTuna - Contributing
+
+.page-header
+  %h1
+    Contributing
+
+%section
+  %h2 Source code
+
+  %p
+    The source code of BigTuna is available on <a href="http://github.com/appelier/bigtuna">Github</a>.
+    If you have any ideas for features and/or patches or would somehow like to contribute, go ahead, fork it,
+    implement (write tests!) and send us a pull request. We will gladly merge it.
+
+%section
+  %h2#vcs VCS
+
+  %p
+    We now support Git and Mercurial VCSes out of the box, but it takes very little effort to write your own vcs support.
+    Please see <code>extras/big_tuna/vcs/</code>A, write your own handler and send us a pull request on Github
+
+    %ol
+      %li
+        Provide a user—displayed VCS name
+        :coderay
+          #!ruby
+            NAME = "My VCS"
+
+      %li
+        Provide a database—safe vcs name
+        :coderay
+          #!ruby
+            VALUE = "my_vcs"
+
+      %li
+        When overriding the initializer, call <code>super(source, branch)</code> to set basic values
+
+      %li
+        Implement the <code>#head_info</code> instance method which should return an array of two elements <code>[info, command]</code>
+
+        %ul
+          %li <code>info</code> — Hash of fetched commit data:
+          %ul
+            %li <code>:commit</code> — commit hash
+            %li <code>:author</code> — commit author
+            %li <code>:email</code> — commit email
+            %li <code>:committed_at</code> — Time object indicating time commit was created
+            %li <code>:commit_message</code> — commit message
+          %li command — String with shell command used to get data
+      %li Implement <code>#clone(where_to)</code> instance method which should clone the repository to a directory specified by where_to.
+      The directory may have to be created
+
+%section
+  %h2#hooks Hooks
+
+  %p
+    Currently there is a Mailer and xmpp hook for you. If you want support for custom services please check
+    <code>extras/big_tuna/hooks/</code> and create a new hook based on existing hooks.
+
+    %ol
+      %li
+        Provide a unique database—safe hook name
+        :coderay
+          #!ruby
+            NAME = "mailer"
+
+        If your hook requires configuration you can create hooks/NAME/_form.html.haml partial with various config fields.
+        Those fields should have their names set to configuration[field_name]. They will be stored as Hash in hook config.
+
+      %li
+        Define methods you need
+        %ul
+          %li build_passed(build, config)
+          %li build_fixed(build, config)
+          %li build_still_fails(build, config)
+          %li build_finished(build, config)
+          %li build_failed(build, config)
