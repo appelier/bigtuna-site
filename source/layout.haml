@@ -1,0 +1,14 @@
+!!! Strict
+%html
+  %head
+    %meta{name: "description", content: "BigTuna Continuous Integration"}
+    %meta{name: "charset", content: "utf-8"}
+    %meta{name: "keywords", content: "bigtuna, continuous integration, ci, michal bugno, antek piechnik" }
+    = stylesheet_link_tag "bootstrap.css"
+    = stylesheet_link_tag "site.css"
+    = yield_content :head
+
+  %body
+    .navbar.navbar-fixed-top= partial("partials/navigation")
+
+    .container= yield
